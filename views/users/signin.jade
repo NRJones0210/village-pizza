@@ -1,0 +1,27 @@
+include ../layout
+
+  .container
+    .row
+      .col-md-4
+      .col-md-4.text-center
+        h1= title
+        if errors
+          .alert.alert-danger
+            for error in errors
+              li= error
+    .row
+      .col-md-4
+      .col-md-4
+        form(action='/users/signin' method='POST')
+          .form-group
+            label(for='email') Email
+            input.form-control(type='text' name='email' placeholder='Email'  autofocus value=email)
+          .form-group
+            label(for='password') Password
+            input.form-control(type='text' name='password' placeholder='Password'  value=password)
+          div
+            input.btn.btn-primary(type='submit' name='signin' value='Sign In')
+
+include ../footer
+  script.
+    $("#signin").addClass("active");

@@ -1,0 +1,14 @@
+include ../layout
+
+  if errors
+    .container
+      .alert.alert-danger
+        for error in errors
+          li= error
+  if !errors
+    .container
+      h1 Welcome #{email_session}
+      p You are now logged in!
+
+include ../footer
+

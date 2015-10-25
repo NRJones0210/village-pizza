@@ -1,0 +1,38 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Authentication
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
+    //- link(rel='stylesheet', href='/stylesheets/style.css')     
+  body
+    if !email_session 
+      nav.navbar.navbar-inverse
+        .container-fluid
+          .navbar-header
+            a.navbar-brand(href='/') My App
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li#signup
+                a(href='/users/signup') Sign Up
+              li
+                a |
+              li#signin
+                a(href='/users/signin') Sign In
+    else
+      nav.navbar.navbar-inverse
+        .container-fluid
+          .navbar-header
+            a.navbar-brand(href='/') My App
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav.navbar-right
+              li#email
+                a(href='')=email_session
+              li
+                a |
+              li#signout
+                a(href='/users/signout') Sign Out
+    block content
