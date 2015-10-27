@@ -1,0 +1,17 @@
+include ../layout
+
+  .container
+    h1= title
+    for order in orders
+      section
+        h1= order.user.name
+        ul
+          for orderItem in order.orderItems
+            li= orderItem.name
+            ul
+              for topping in orderItem.toppings
+                li= topping.name
+
+
+
+include ../footer

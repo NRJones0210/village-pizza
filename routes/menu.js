@@ -14,18 +14,38 @@ function getToppings() {
   return Toppings.find({})
 }
 
+var joinPizzaToppings = function (pizzas, toppings) {
+  var indexed = toppings.reduce(function (result, topping) {
+    result[topping._id.toString()] = topping
+    return result
+  }, {})
+  pizzas.forEach(function (pizza) {
+    pizza.toppings = pizza.toppingIds.map(function (_id) {
+      return indexed[_id.toString()]
+    })
+  })
+  return pizzas
+}
+
+
 router.get('/', function(req, res, next) {
   res.render('menu/index', {title: 'Menu Home'})
 })
 
 router.get('/pizza', function(req, res, next) {
-  var pizzas;
+  Pizzas.find({}).then(function (pizzas) {
+    var toppingIds = pizzas.reduce(function (result, pizza) {
+      return result.concat(pizza.toppingIds)
+    }, [])
+    Toppings.find({_id: {$in: toppingIds}}).then(function (toppings) {
+      joinPizzaToppings(pizzas, toppings)
+      console.log(pizzas)
+      console.log(pizzas[0].toppings)
 
-  getPizzas().then(function (pizzasData) {
-    pizzas = pizzasData
-    res.render('menu/pizza', { title: 'Pizza!',
-                               pizzas: pizzas
-    })
+      res.render('menu/pizza', {title: 'Pizza!',
+                                pizzas: pizzas
+                              })
+    })    
   })
 })
 

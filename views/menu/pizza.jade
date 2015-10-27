@@ -6,5 +6,8 @@ include ../layout
       section
         h1
           a(href="/menu/pizza/" + pizza._id) #{pizza.name}
+        ul
+          for topping in pizza.toppings
+            li= topping.name
 
 include ../footer

@@ -1,9 +1,18 @@
 var db = require('monk')('localhost/restaurant-db')
 
+var Users = db.get('users');
 var MenuCategories = db.get('menuCategories')
 var Toppings = db.get('toppings')
 var Pizzas = db.get('pizzas')
+var Orders = db.get('orders')
 
+// USERS
+var joeId = Users.id(),
+    sueId = Users.id(),
+    timId = Users.id(),
+    kimId = Users.id()
+
+// TOPPINGS
 var pepperoniId       = Toppings.id(),
     italianSausageId  = Toppings.id(),
     hamburgerId       = Toppings.id(),
@@ -24,13 +33,26 @@ var pepperoniId       = Toppings.id(),
     artichokeHeartsId = Toppings.id(),
     chickenId         = Toppings.id()
 
+// PIZZAS
 var deluxeId     = Pizzas.id(),
     meatLoversId = Pizzas.id(),
     hawaiianId   = Pizzas.id(),
     veggieId     = Pizzas.id()
 
+// ORDERS - Testing
+var orderOneId = Orders.id(),
+    orderTwoId = Orders.id()
 
 Promise.all([
+  Users.remove().then(function () {
+    return Promise.all([
+      Users.insert({_id: joeId, name: 'Joe'}),
+      Users.insert({_id: sueId, name: 'Sue'}),
+      Users.insert({_id: timId, name: 'Tim'}),
+      Users.insert({_id: kimId, name: 'Kim'})
+    ])
+  }),
+
   Toppings.remove().then(function () {
     return Promise.all([
       Toppings.insert({_id: pepperoniId, name: 'Pepperoni'}),
@@ -78,69 +100,25 @@ Promise.all([
         toppingIds: [greenPeppersId, spinichId, onionsId, mushroomsId, freshTomatoesId, blackOlivesId]
       })
     ])
-  })
-]) 
+  }),
 
-// var galvanizeId = locations.id(),
-//     pivotalId = locations.id(),
-//     googleId = locations.id()
-
-
-// var joeId = users.id(),
-//     sueId = users.id(),
-//     timId = users.id(),
-//     kimId = users.id()
-
-// Promise.all([
-//   users.remove().then(function () {
-//     return Promise.all([
-//       users.insert({_id: joeId, name: 'Joe', follows: [pythonId, phpId]}),
-//       users.insert({_id: sueId, name: 'Sue', follows: [pythonId]}),
-//       users.insert({_id: timId, name: 'Tim', follows: [rubyId, nodeId]}),
-//       users.insert({_id: kimId, name: 'Kim', follows: [pythonId]}),
-//     ])
-//   }),
-
-//   locations.remove().then(function () {
-//     return Promise.all([
-//       locations.insert({_id: galvanizeId, name: 'Galvanize', address: 'Platte St, Denver'}),
-//       locations.insert({_id: pivotalId, name: 'Pivotal Labs', address: '17th St, Boulder'}),
-//       locations.insert({_id: googleId, name: 'Google', address: 'Pearl St, Boulder'}),
-//     ])
-//   }),
-
-//   meetups.remove({}).then(function () {
-//     return Promise.all([
-//       meetups.insert({
-//         _id: nodeId,
-//         name: 'NodeJS',
-//         description: 'Learn all the scripts!',
-//         locationId: galvanizeId,
-//         memberIds: [joeId, kimId],
-//       }),
-//       meetups.insert({
-//         _id: rubyId,
-//         name: 'Ruby',
-//         description: 'What a gem!',
-//         locationId: galvanizeId,
-//         memberIds: [timId, kimId],
-//       }),
-//       meetups.insert({
-//         _id: phpId,
-//         name: 'PHP',
-//         description: 'And oldy but a goodie!',
-//         locationId: googleId,
-//         memberIds: [sueId, joeId, kimId],
-//       }),
-//       meetups.insert({
-//         _id: pythonId,
-//         name: 'Python',
-//         description: 'Get your data on!',
-//         locationId: googleId,
-//         memberIds: [],
-//       }),
-//     ])
-//   }),
-// ]).then(function () {
-//   db.close()
-// })
+  // Order Testing 
+  Orders.remove().then(function () {
+    return Promise.all([
+      Orders.insert({
+        _id: orderOneId,
+        userId: joeId,
+        username: null,
+        orderItemIds: [deluxeId, veggieId]
+      }),
+      Orders.insert({
+        _id: orderTwoId,
+        userId: timId,
+        username: null,
+        orderItemIds: [hawaiianId, meatLoversId]
+      }),
+    ])
+  }),
+]).then(function () {
+  db.close()
+});

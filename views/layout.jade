@@ -4,10 +4,10 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Authentication
+    title Village Pizza
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
-    //- link(rel='stylesheet', href='/stylesheets/style.css')     
+    link(rel='stylesheet', href='/stylesheets/style.css')     
   body
     if !email_session 
       nav.navbar.navbar-inverse
@@ -15,6 +15,13 @@ html(lang='en')
           .navbar-header
             a.navbar-brand(href='/') Village Pizza
           .collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li#menu
+                a(href='/menu') Menu
+              li#pizza
+                a(href='/menu/pizza') Pizza
+              li#orders
+                a(href='/orders') Orders
             ul.nav.navbar-nav.navbar-right
               li#signup
                 a(href='/users/signup') Sign Up
