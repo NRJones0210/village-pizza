@@ -1,0 +1,10 @@
+include ../layout
+
+  .container
+    h1 All the Pizzas!
+    for pizza in pizzas
+      section
+        h1
+          a(href="/menu/pizza/" + pizza._id) #{pizza.name}
+
+include ../footer

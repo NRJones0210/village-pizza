@@ -1,0 +1,11 @@
+include ../layout
+
+  .container
+    section
+      h1= pizza.name
+      for topping in toppings
+        li= topping.name
+      h3
+        button.btn Add to Order
+
+include ../footer
