@@ -12,6 +12,8 @@ require('dotenv').load()
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var menu = require('./routes/menu');
+var pizzas = require('./routes/pizzas');
+var pastas = require('./routes/pastas');
 var orders = require('./routes/orders');
 
 var app = express();
@@ -39,6 +41,8 @@ app.use(session({
 app.use('/', routes);
 app.use('/users', users);
 app.use('/menu', menu);
+app.use('/pizzas', pizzas);
+app.use('/pastas', pastas);
 app.use('/orders', orders);
 
 // catch 404 and forward to error handler

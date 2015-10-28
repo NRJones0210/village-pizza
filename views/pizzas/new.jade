@@ -1,0 +1,29 @@
+include ../layout
+
+  .container
+    .row
+      .col-md-4
+      .col-md-4.text-center
+        h1= title
+        if errors
+          .alert.alert-danger
+            for error in errors
+              li= error
+    .row
+      .col-md-4
+      .col-md-4
+        form(action='/pizzas/new' method='POST')
+          .form-group
+            label(for='name') Name of Pizza
+            input.form-control(type='text' name='name' placeholder='Name of Pizza'  autofocus value=name)
+          .toppings
+            for topping in toppings
+              .checkbox
+                label
+                  input(type='checkbox' name= topping.name value=topping._id)
+                  | #{topping.name}
+          div
+            input.btn.btn-primary(type='submit' name='addPizza' value='Add Pizza')
+
+
+include ../footer

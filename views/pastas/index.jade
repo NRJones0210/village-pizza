@@ -1,0 +1,12 @@
+include ../layout
+
+  .container
+    h1 All Pastas!
+    for pasta in pastas
+      section
+        h1
+          a(href="/pastas/" + pasta._id) #{pasta.name}
+
+include ../footer
+  script.
+    $("#pastas").addClass("active");

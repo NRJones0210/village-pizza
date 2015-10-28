@@ -3,8 +3,13 @@ include ../layout
   .container
     h1= title
     p Welcome to #{title}
-    a(href='/menu/pizza') Pizza!
+    p
+      a(href='/pizzas') Pizzas!
+    p
+      a(href='/pastas') Pastas!
 
 
 
 include ../footer
+  script.
+    $("#menu").addClass("active");

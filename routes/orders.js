@@ -5,6 +5,7 @@ var Users = db.get('users');
 var MenuCategories = db.get('menuCategories');
 var Toppings = db.get('toppings');
 var Pizzas = db.get('pizzas');
+var Pastas = db.get('pastas');
 var Orders = db.get('orders');
 /* GET home page. */
 
@@ -91,8 +92,7 @@ router.get('/', function(req, res, next) {
         }, [])
         Toppings.find({_id: {$in: toppingIds}}).then(function (toppings) {  
           joinOrderItemsToppings(orders, toppings)
-          // console.log(orders)
-          console.log(orders[0].orderItems[0].toppings[0].name)
+          // console.log(orders[0].orderItems[0].toppings[0].name)
           res.render('orders/index', {title: 'All Orders',
                                       orders: orders
                                     })

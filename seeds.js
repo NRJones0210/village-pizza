@@ -4,6 +4,7 @@ var Users = db.get('users');
 var MenuCategories = db.get('menuCategories')
 var Toppings = db.get('toppings')
 var Pizzas = db.get('pizzas')
+var Pastas = db.get('pastas')
 var Orders = db.get('orders')
 
 // USERS
@@ -39,7 +40,16 @@ var deluxeId     = Pizzas.id(),
     hawaiianId   = Pizzas.id(),
     veggieId     = Pizzas.id()
 
-// ORDERS - Testing
+// PASTAS
+var spaghettiMeatballId = Pastas.id(),
+    lasagnaId           = Pastas.id(),
+    manicottiId         = Pastas.id(),
+    cannelloniId        = Pastas.id(),
+    fettucciniId        = Pastas.id(),
+    chickenParmId       = Pastas.id(),
+    chickenFettId       = Pastas.id()
+
+// ORDERS
 var orderOneId = Orders.id(),
     orderTwoId = Orders.id()
 
@@ -102,21 +112,63 @@ Promise.all([
     ])
   }),
 
-  // Order Testing 
+  Pastas.remove().then(function () {
+    return Promise.all([
+      Pastas.insert({
+        _id: spaghettiMeatballId,
+        name: 'Spaghetti & Meatballs'
+      }),
+      Pastas.insert({
+        _id: lasagnaId,
+        name: 'Lasagna'
+      }),
+      Pastas.insert({
+        _id: manicottiId,
+        name: 'Manicotti'
+      }),
+      Pastas.insert({
+        _id: cannelloniId,
+        name: 'Cannelloni'
+      }),
+      Pastas.insert({
+        _id: fettucciniId,
+        name: 'Fettuccini'
+      }),
+      Pastas.insert({
+        _id: chickenParmId,
+        name: 'Chicken Parmesan'
+      }),
+      Pastas.insert({
+        _id: chickenFettId,
+        name: 'Chicken Fettuccini'
+      })    
+    ])
+  }),
+
   Orders.remove().then(function () {
     return Promise.all([
       Orders.insert({
         _id: orderOneId,
         userId: joeId,
         username: null,
-        orderItemIds: [deluxeId, veggieId]
+        orderItemIds: [veggieId, deluxeId]
+        // orderItemIds: {
+        //   pizzas: [veggieId, deluxeId],
+        //   pastas: [spaghettiMeatballId],
+        //   beverages: [],
+        //   salads: []
+        // }
       }),
       Orders.insert({
         _id: orderTwoId,
         userId: timId,
         username: null,
         orderItemIds: [hawaiianId, meatLoversId]
-      }),
+        // orderItemIds: {
+        //   pizzas: [hawaiianId, meatLoversId],
+        //   pastas: [chickenFettId, manicottiId]
+        // }
+      })
     ])
   }),
 ]).then(function () {

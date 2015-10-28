@@ -1,13 +1,17 @@
 include ../layout
 
   .container
-    h1 All the Pizzas!
+    h1 All Pizzas!
     for pizza in pizzas
       section
         h1
-          a(href="/menu/pizza/" + pizza._id) #{pizza.name}
+          a(href="/pizzas/" + pizza._id) #{pizza.name}
         ul
           for topping in pizza.toppings
             li= topping.name
+    p
+      a(href='/pizzas/new') Add New Pizza
 
 include ../footer
+  script.
+    $("#pizzas").addClass("active");

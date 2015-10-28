@@ -12,6 +12,6 @@ include ../layout
               for topping in orderItem.toppings
                 li= topping.name
 
-
-
 include ../footer
+  script.
+    $("#orders").addClass("active");
