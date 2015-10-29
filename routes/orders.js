@@ -7,6 +7,7 @@ var Toppings = db.get('toppings');
 var Pizzas = db.get('pizzas');
 var Pastas = db.get('pastas');
 var Orders = db.get('orders');
+require('dotenv').load()
 /* GET home page. */
 
 var joinOrderUser = function (orders, users) {

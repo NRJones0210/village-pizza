@@ -3,6 +3,7 @@ var router = express.Router();
 var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/users-db');
 var Users = db.get('users');
 var bcrypt = require('bcrypt');
+require('dotenv').load()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

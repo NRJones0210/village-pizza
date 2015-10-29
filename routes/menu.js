@@ -4,6 +4,7 @@ var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 var MenuCategories = db.get('menuCategories')
 var Toppings = db.get('toppings')
 var Pizzas = db.get('pizzas')
+require('dotenv').load()
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
