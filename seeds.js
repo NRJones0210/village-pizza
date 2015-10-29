@@ -1,4 +1,4 @@
-var db = require('monk')('localhost/restaurant-db')
+var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 
 var Users = db.get('users');
 var MenuCategories = db.get('menuCategories')
