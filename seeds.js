@@ -95,9 +95,9 @@ Promise.all([
         toppingIds: [pepperoniId, italianSausageId, greenPeppersId, onionsId]
       }),
       Pizzas.insert({
-        _id: meatLoversId,
-        name: 'Meat Lovers',
-        toppingIds: [pepperoniId, italianSausageId, hamburgerId, hamId]
+        _id: veggieId,
+        name: 'Veggie',
+        toppingIds: [greenPeppersId, spinichId, onionsId, mushroomsId, freshTomatoesId, blackOlivesId]
       }),
       Pizzas.insert({
         _id: hawaiianId,
@@ -105,10 +105,10 @@ Promise.all([
         toppingIds: [hamId, baconId, pineappleId, onionsId]
       }),
       Pizzas.insert({
-        _id: veggieId,
-        name: 'Veggie',
-        toppingIds: [greenPeppersId, spinichId, onionsId, mushroomsId, freshTomatoesId, blackOlivesId]
-      })
+        _id: meatLoversId,
+        name: 'Meat Lovers',
+        toppingIds: [pepperoniId, italianSausageId, hamburgerId, hamId]
+      }),
     ])
   }),
 
@@ -150,25 +150,33 @@ Promise.all([
       Orders.insert({
         _id: orderOneId,
         userId: joeId,
-        username: null,
         orderItemIds: [veggieId, deluxeId]
-        // orderItemIds: {
-        //   pizzas: [veggieId, deluxeId],
-        //   pastas: [spaghettiMeatballId],
-        //   beverages: [],
-        //   salads: []
-        // }
       }),
       Orders.insert({
         _id: orderTwoId,
         userId: timId,
-        username: null,
         orderItemIds: [hawaiianId, meatLoversId]
-        // orderItemIds: {
-        //   pizzas: [hawaiianId, meatLoversId],
-        //   pastas: [chickenFettId, manicottiId]
-        // }
       })
+      // Orders.insert({
+      //   _id: orderOneId,
+      //   userId: joeId,
+      //   orderItemIds: {
+      //     pizzas: [veggieId, deluxeId],
+      //     pastas: [spaghettiMeatballId],
+      //     beverages: [],
+      //     salads: []
+      //   }
+      // }),
+      // Orders.insert({
+      //   _id: orderTwoId,
+      //   userId: timId,
+      //   orderItemIds: {
+      //     pizzas: [hawaiianId, meatLoversId],
+      //     pastas: [chickenFettId],
+      //     beverages: [],
+      //     salads: []
+      //   }
+      // })            
     ])
   }),
 ]).then(function () {
