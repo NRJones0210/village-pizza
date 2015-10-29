@@ -1,3 +1,4 @@
+require('dotenv').load();
 var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 
 var Users = db.get('users');
