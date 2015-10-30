@@ -7,6 +7,8 @@ var Toppings = db.get('toppings');
 var Pizzas = db.get('pizzas');
 var Pastas = db.get('pastas');
 var Orders = db.get('orders');
+var OrdersFunctions = require('../lib/orders')
+
 require('dotenv').load()
 /* GET home page. */
 

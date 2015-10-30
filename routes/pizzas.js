@@ -4,21 +4,22 @@ var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 var MenuCategories = db.get('menuCategories')
 var Toppings = db.get('toppings')
 var Pizzas = db.get('pizzas')
+var PizzaFunctions = require('../lib/orders')
 require('dotenv').load()
 /* GET home page. */
 
-var joinPizzaToppings = function (pizzas, toppings) {
-  var indexed = toppings.reduce(function (result, topping) {
-    result[topping._id.toString()] = topping
-    return result
-  }, {})
-  pizzas.forEach(function (pizza) {
-    pizza.toppings = pizza.toppingIds.map(function (_id) {
-      return indexed[_id.toString()]
-    })
-  })
-  return pizzas
-}
+// var joinPizzaToppings = function (pizzas, toppings) {
+//   var indexed = toppings.reduce(function (result, topping) {
+//     result[topping._id.toString()] = topping
+//     return result
+//   }, {})
+//   pizzas.forEach(function (pizza) {
+//     pizza.toppings = pizza.toppingIds.map(function (_id) {
+//       return indexed[_id.toString()]
+//     })
+//   })
+//   return pizzas
+// }
 
 router.get('/', function(req, res, next) {
   Pizzas.find({}).then(function (pizzas) {
@@ -26,7 +27,7 @@ router.get('/', function(req, res, next) {
       return result.concat(pizza.toppingIds)
     }, [])
     Toppings.find({_id: {$in: toppingIds}}).then(function (toppings) {
-      joinPizzaToppings(pizzas, toppings)
+      PizzaFunctions.joinPizzaToppings(pizzas, toppings)
       console.log(pizzas)
       console.log(pizzas[0].toppings)
 

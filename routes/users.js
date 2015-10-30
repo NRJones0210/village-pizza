@@ -130,7 +130,7 @@ router.post('/signin', function(req, res, next) {
 
 router.get('/loggedIn', function(req, res, next) {
   if(req.session.email) {
-    res.render('users/loggedIn', { 
+    res.render('users/loggedin', { 
                                   title: 'LOGGED IN',
                                   email_session: req.session.email 
     })
