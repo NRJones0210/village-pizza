@@ -19,8 +19,8 @@ router.get('/', function(req, res, next) {
       console.log(pizzas[0].toppings)
 
       res.render('pizzas/index', {title: 'Pizza!',
-                                pizzas: pizzas
-                              })
+                                  pizzas: pizzas
+                                })
     })    
   })
 })

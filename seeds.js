@@ -1,4 +1,4 @@
-require('dotenv').load();
+// require('dotenv').load();
 var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 
 var Users = db.get('users');
@@ -148,36 +148,34 @@ Promise.all([
 
   Orders.remove().then(function () {
     return Promise.all([
-      Orders.insert({
-        _id: orderOneId,
-        userId: joeId,
-        orderItemIds: [veggieId, deluxeId]
-      }),
-      Orders.insert({
-        _id: orderTwoId,
-        userId: timId,
-        orderItemIds: [hawaiianId, meatLoversId]
-      })
       // Orders.insert({
       //   _id: orderOneId,
       //   userId: joeId,
-      //   orderItemIds: {
-      //     pizzas: [veggieId, deluxeId],
-      //     pastas: [spaghettiMeatballId],
-      //     beverages: [],
-      //     salads: []
-      //   }
+      //   orderItemIds: [veggieId, deluxeId]
       // }),
       // Orders.insert({
       //   _id: orderTwoId,
       //   userId: timId,
-      //   orderItemIds: {
-      //     pizzas: [hawaiianId, meatLoversId],
-      //     pastas: [chickenFettId],
-      //     beverages: [],
-      //     salads: []
-      //   }
-      // })            
+      //   orderItemIds: [hawaiianId, meatLoversId]
+      // })
+      Orders.insert({
+        _id: orderOneId,
+        userId: joeId,
+        orderItemIds: {
+          pizzaIds: [veggieId, deluxeId],
+          pastaIds: [spaghettiMeatballId],
+          saladIds: []
+        }
+      }),
+      Orders.insert({
+        _id: orderTwoId,
+        userId: timId,
+        orderItemIds: {
+          pizzaIds: [hawaiianId, meatLoversId],
+          pastaIds: [chickenFettId],
+          saladIds: []
+        }
+      })            
     ])
   }),
 ]).then(function () {
