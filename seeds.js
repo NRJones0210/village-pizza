@@ -1,11 +1,13 @@
+var db = require('monk')('localhost/restaurant-db');
+// var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 // require('dotenv').load();
-var db = require('monk')(process.env.MONGOLAB_URI || 'localhost/restaurant-db');
 
 var Users = db.get('users');
 var MenuCategories = db.get('menuCategories')
 var Toppings = db.get('toppings')
 var Pizzas = db.get('pizzas')
 var Pastas = db.get('pastas')
+var Salads = db.get('salads')
 var Orders = db.get('orders')
 
 // USERS
@@ -50,9 +52,17 @@ var spaghettiMeatballId = Pastas.id(),
     chickenParmId       = Pastas.id(),
     chickenFettId       = Pastas.id()
 
+// SALADS
+var sideSaladId          = Salads.id(),
+    chefSaladId          = Salads.id(),
+    chickenDijonSaladId  = Salads.id(),
+    chickenCeaserSaladId = Salads.id()
+
 // ORDERS
 var orderOneId = Orders.id(),
-    orderTwoId = Orders.id()
+    orderTwoId = Orders.id(),
+    orderThreeId = Orders.id(),
+    orderFourId = Orders.id()
 
 Promise.all([
   Users.remove().then(function () {
@@ -146,24 +156,35 @@ Promise.all([
     ])
   }),
 
+  Salads.remove().then(function () {
+    return Promise.all([
+      Salads.insert({
+        _id: sideSaladId,
+        name: 'Side Salad'
+      }),
+      Salads.insert({
+        _id: chefSaladId,
+        name: 'Chef Salad'
+      }),
+      Salads.insert({
+        _id: chickenDijonSaladId,
+        name: 'Chicken Dijon Salad'
+      }),
+      Salads.insert({
+        _id: chickenCeaserSaladId,
+        name: 'Chicken Ceaser Salad'
+      })
+    ])
+  }),                 
+
   Orders.remove().then(function () {
     return Promise.all([
-      // Orders.insert({
-      //   _id: orderOneId,
-      //   userId: joeId,
-      //   orderItemIds: [veggieId, deluxeId]
-      // }),
-      // Orders.insert({
-      //   _id: orderTwoId,
-      //   userId: timId,
-      //   orderItemIds: [hawaiianId, meatLoversId]
-      // })
       Orders.insert({
         _id: orderOneId,
         userId: joeId,
         orderItemIds: {
           pizzaIds: [veggieId, deluxeId],
-          pastaIds: [spaghettiMeatballId],
+          pastaIds: [spaghettiMeatballId, chickenFettId],
           saladIds: []
         }
       }),
@@ -172,10 +193,28 @@ Promise.all([
         userId: timId,
         orderItemIds: {
           pizzaIds: [hawaiianId, meatLoversId],
-          pastaIds: [chickenFettId],
+          pastaIds: [],
           saladIds: []
         }
-      })            
+      }),
+      Orders.insert({
+        _id: orderThreeId,
+        userId: sueId,
+        orderItemIds: {
+          pizzaIds: [],
+          pastaIds: [fettucciniId, lasagnaId],
+          saladIds: []
+        }
+      }),  
+      Orders.insert({
+        _id: orderFourId,
+        userId: kimId,
+        orderItemIds: {
+          pizzaIds: [],
+          pastaIds: [],
+          saladIds: [chickenCeaserSaladId, chefSaladId]
+        }
+      }),                       
     ])
   }),
 ]).then(function () {

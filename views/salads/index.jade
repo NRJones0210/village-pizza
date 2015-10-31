@@ -1,0 +1,12 @@
+include ../layout
+
+  .container
+    h1 All Salads!
+    for salad in salads
+      section
+        h1
+          a(href="/salads/" + salad._id) #{salad.name}
+
+include ../footer
+  script.
+    $("#salads").addClass("active");

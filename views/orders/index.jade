@@ -5,12 +5,24 @@ include ../layout
     for order in orders
       section
         h1= order.user.name
-        ul
-          for pizza in order.orderPizzas
-            li= pizza.name
-            ul
-              for topping in pizza.toppings
-                li= topping.name
+        if order.orderPizzas
+          h3 Pizzas
+          ul
+            for pizza in order.orderPizzas
+              li= pizza.name
+              ul
+                for topping in pizza.toppings
+                  li= topping.name
+        if order.orderPastas
+          h3 Pastas
+          ul
+            for pasta in order.orderPastas
+              li= pasta.name
+        if order.orderSalads
+          h3 Salads
+          ul
+            for salad in order.orderSalads
+              li= salad.name
 
 include ../footer
   script.
