@@ -37,16 +37,9 @@ router.post('/new', function(req, res, next) {
   var errors = []
   var name = req.body.name
   var toppingIds = []
-  // var $checkbox = $('.checkbox')
-
-  // for (var i=0, len=tops.length; i<len; i++) {
-  //   if ( tops[i].type === 'checkbox' ) {
-  //       tops[i].onclick = function() {
-  //         console.log(tops[i])
-  //         toppingIds.push(tops[i])
-  //       }
-  //   }
-  // }
+  $.each($("input:checked"), function(){            
+      toppingIds.push($(this).val());
+  });
   console.log(toppingIds)
   res.redirect('/pizzas')
 })

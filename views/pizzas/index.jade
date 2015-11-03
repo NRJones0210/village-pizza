@@ -1,16 +1,22 @@
 include ../layout
 
   .container
-    h1 All Pizzas!
-    for pizza in pizzas
-      section
-        h1
-          a(href="/pizzas/" + pizza._id) #{pizza.name}
-        ul
-          for topping in pizza.toppings
-            li= topping.name
-    p
-      a(href='/pizzas/new') Add New Pizza
+    .row.text-center
+      h1 Pizzas!
+    .row
+      for pizza in pizzas
+        .col-md-3
+          section
+            h2.text-center
+              a(href="/pizzas/" + pizza._id) #{pizza.name}
+            ul
+              for topping in pizza.toppings
+                li= topping.name
+            .row.text-center
+              button.btn Add to Order
+    .row
+      p
+        a(href='/pizzas/new') Add New Pizza
 
 include ../footer
   script.

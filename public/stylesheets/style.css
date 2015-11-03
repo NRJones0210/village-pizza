@@ -18,6 +18,12 @@ section h1 {
   padding: .3em 1em;
 }
 
+section h2 {
+  background: #ccc;
+  margin: 0;
+  padding: .3em 1em;
+}
+
 section p {
   margin-left: 1em;
   margin-right: 1em;

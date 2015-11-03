@@ -64,7 +64,7 @@ router.get('/', function(req, res, next) {
             console.log(orderSaladIds)
             Salads.find({_id: {$in: orderSaladIds}}).then(function (orderSalads) {
               OrdersFunctions.joinOrderSalads(orders, orderSalads)
-
+              console.log(orders)
               res.render('orders/index', {title: 'All Orders',
                                           orders: orders
                                         })
